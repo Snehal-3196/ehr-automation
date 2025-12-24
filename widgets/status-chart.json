@@ -1,0 +1,1 @@
+[{"uid":"bb3bbc9c382ff97c","name":"test_mcp_echo","time":{"start":1766472524233,"stop":1766472524265,"duration":32},"status":"passed","severity":"normal"},{"uid":"842aa99f2fe97d5d","name":"test_mcp_missing_input","time":{"start":1766472524265,"stop":1766472524266,"duration":1},"status":"passed","severity":"normal"}]
