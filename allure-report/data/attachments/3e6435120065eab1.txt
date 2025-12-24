@@ -1,0 +1,40 @@
+
+[DEBUG] All button texts after Standalone selection:
+- 
+- Logout
+- 
+- Add New Connection
+- Filter
+- 
+- 
+- Manage
+- Test
+- 
+- 
+- Manage
+- Test
+- 
+- 
+- Manage
+- Test
+- 
+- 
+- Manage
+- Test
+- 
+- 
+- Manage
+- Test
+- 
+- 
+- Manage
+- Test
+- 
+- 
+- Manage
+- Test
+- Cancel
+- Upgrade on AWS Marketplace
+
+[DEBUG] Could not find Add Connection UI. Visible text on page:
+[DEBUG] Could not get page text; browser may be closed.

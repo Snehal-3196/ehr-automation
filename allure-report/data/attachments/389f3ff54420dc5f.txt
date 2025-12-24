@@ -1,0 +1,2 @@
+
+[DEBUG] Could not find Add Connection UI. Visible text on page:
