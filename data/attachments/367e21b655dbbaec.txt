@@ -1,0 +1,2 @@
+✅ Dashboard loaded
+✅ View Connections button visible

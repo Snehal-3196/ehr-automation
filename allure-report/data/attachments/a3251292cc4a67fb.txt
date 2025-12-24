@@ -1,0 +1,4 @@
+✅ Filled Base URL: https://r4.smarthealthit.org/
+✅ Auto-detect clicked.
+✅ Filled OAuth Authorization URL: https://launch.smarthealthit.org/v/r4/sim/WzIsIiIsIiIsIkFVVE8iLDAsMCwwLCIiLCIiLCIiLCIiLCJhdXRoX2ludmFsaWRfY2xpZW50X2lkIiwiIiwiIiwwLDEsIiJd/auth/authorize
+✅ Form filled completely (no submit). Browser remains open for inspection.
