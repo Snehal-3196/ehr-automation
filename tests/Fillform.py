@@ -1,6 +1,5 @@
 from playwright.sync_api import sync_playwright
 import time
-import pytest
 
 def complete_epic_connection_flow():
     with sync_playwright() as p:
@@ -759,21 +758,12 @@ def complete_epic_connection_flow():
 
         except Exception as e:
             print(f"\n❌ ERROR: {e}")
-            try:
-                # Only try screenshot if page and browser are not closed
-                if hasattr(page, 'screenshot'):
-                    page.screenshot(path="error.png")
-            except Exception as screenshot_error:
-                print(f"Screenshot failed: {screenshot_error}")
+            page.screenshot(path="error.png")
 
         finally:
             print("\n" + "=" * 70)
-            try:
-                browser.close()
-            except Exception as close_error:
-                print(f"Browser close failed: {close_error}")
+            input("Press Enter to close browser...")
+            browser.close()
 
-
-# Pytest-compatible test function
-def test_complete_epic_connection_flow():
+if __name__ == "__main__":
     complete_epic_connection_flow()
