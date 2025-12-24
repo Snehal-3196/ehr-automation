@@ -1,0 +1,10 @@
+playwright
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+openai
+pytest
+
+# Qase pytest integration
+qase-pytest

@@ -1,1 +1,0 @@
-Login script executed — check if logged in.
