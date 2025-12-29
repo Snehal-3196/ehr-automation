@@ -1,0 +1,2 @@
+✅ Connections page loaded successfully.
+✅ Add New Connection button is visible.
