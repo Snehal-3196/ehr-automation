@@ -1,0 +1,3 @@
+✅ Filled Base URL: https://r4.smarthealthit.org/
+✅ Auto-detect clicked.
+✅ Form filled (without submit). Browser remains open for inspection.
