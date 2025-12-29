@@ -1,0 +1,19 @@
+======================================================================
+TEST 6: NAVIGATE TO DASHBOARD
+======================================================================
+
+[Step 1] Login...
+✅ Logged in
+
+[Step 2] Clicking Dashboard menu...
+✅ Dashboard menu clicked
+
+[Step 3] Verifying Dashboard page...
+✅ Dashboard page loaded successfully
+   Current URL: https://demo.ehrconnect.healthconnect.systems/dashboard
+
+📸 Screenshot saved: test_06_dashboard.png
+
+======================================================================
+✅ TEST 6 COMPLETED
+======================================================================
