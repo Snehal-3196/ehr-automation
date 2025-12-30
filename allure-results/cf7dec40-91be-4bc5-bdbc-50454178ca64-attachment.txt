@@ -1,0 +1,35 @@
+======================================================================
+TEST 5: CREATE NEW CONNECTION
+======================================================================
+
+[Step 1] Login...
+✅ Logged in
+
+[Step 2] Navigate to Connections and click Add...
+✅ Add Connection form opened
+
+[Step 3] Select Epic and Standalone...
+✅ Epic Standalone selected
+
+[Step 4] Filling connection details...
+✅ Connection Name: PerrylHealth
+✅ Client ID filled
+✅ Client Secret filled
+✅ Base URL filled
+✅ Clicking Auto-detect button...
+✅ Auto-detect button clicked
+⏳ Waiting for auto-detection to complete...
+✅ Auto-detection completed
+⚠️ Auto-detected OAuth Authorization URL not found, using fallback.
+✅ OAuth Token URL filled
+✅ OAuth Scopes filled
+
+[Step 5] Creating connection...
+✅ Create button clicked
+
+📸 Screenshot saved: test_05_connection_created.png
+
+======================================================================
+✅ TEST 5 COMPLETED
+✅ Connection Created: PerrylHealth
+======================================================================
