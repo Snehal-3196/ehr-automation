@@ -1,116 +1,118 @@
+import pytest
+import allure
 from playwright.sync_api import sync_playwright
-import time
 
-def edit_connection_name(connection_name="PerrylHealth", new_name="PerrylHealth Connect"):
+@allure.title("Edit connection name: PerrylHealth → PerrylHealth Connect")
+def test_edit_connection_name():
+    connection_name = "PerrylHealth"
+    new_name = "PerrylHealth Connect"
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False, slow_mo=800)
         page = browser.new_page()
         try:
-            # LOGIN
-            page.goto("https://demo.ehrconnect.healthconnect.systems/login")
-            page.wait_for_load_state("networkidle")
-            page.fill("#username", "administrator")
-            page.fill("#password", "Mindbowser@123")
-            try:
-                page.click("button[type='submit']")
-            except:
-                page.click("button")
-            page.wait_for_timeout(3000)
-
-            # GO TO CONNECTIONS PAGE
-            try:
-                page.click("text=Connections")
-            except:
-                page.click("a:has-text('Connections')")
-            page.wait_for_timeout(2000)
-
-            # CLICK MANAGE ON THE CONNECTION
-            manage_clicked = False
-            try:
-                page.click(f"tr:has-text('{connection_name}') button:has-text('Manage')", timeout=3000)
-                manage_clicked = True
-            except:
-                pass
-            if not manage_clicked:
+            with allure.step("Login to EHRConnect"):
+                page.goto("https://demo.ehrconnect.healthconnect.systems/login")
+                page.wait_for_load_state("networkidle")
+                page.fill("#username", "administrator")
+                page.fill("#password", "Mindbowser@123")
                 try:
-                    menu_btn = page.locator(f"tr:has-text('{connection_name}') button[aria-label*='menu' i]")
-                    if menu_btn.count() > 0:
-                        menu_btn.first.click()
-                        page.wait_for_timeout(1000)
-                        page.click("button:has-text('Manage')")
-                        manage_clicked = True
+                    page.click("button[type='submit']")
                 except:
-                    pass
-            if not manage_clicked:
+                    page.click("button")
+                page.wait_for_timeout(3000)
+
+            with allure.step("Go to Connections page"):
                 try:
-                    page.locator("button:has-text('Manage')").first.click()
+                    page.click("text=Connections")
+                except:
+                    page.click("a:has-text('Connections')")
+                page.wait_for_timeout(2000)
+
+            with allure.step(f"Click Manage for {connection_name}"):
+                manage_clicked = False
+                try:
+                    page.click(f"tr:has-text('{connection_name}') button:has-text('Manage')", timeout=3000)
                     manage_clicked = True
                 except:
                     pass
-            if not manage_clicked:
-                print(f"⚠️ Could not find Manage button for '{connection_name}'")
-                input("Press Enter after clicking Manage manually...")
-            page.wait_for_timeout(2000)
+                if not manage_clicked:
+                    try:
+                        menu_btn = page.locator(f"tr:has-text('{connection_name}') button[aria-label*='menu' i]")
+                        if menu_btn.count() > 0:
+                            menu_btn.first.click()
+                            page.wait_for_timeout(1000)
+                            page.click("button:has-text('Manage')")
+                            manage_clicked = True
+                    except:
+                        pass
+                if not manage_clicked:
+                    try:
+                        page.locator("button:has-text('Manage')").first.click()
+                        manage_clicked = True
+                    except:
+                        pass
+                assert manage_clicked, f"Could not find Manage button for '{connection_name}'"
+                page.wait_for_timeout(2000)
 
-            # CLICK EDIT BUTTON
-            edit_selectors = [
-                "button:has-text('Edit')",
-                "a:has-text('Edit')",
-                "[aria-label='Edit']",
-                ".edit-button"
-            ]
-            edit_clicked = False
-            for selector in edit_selectors:
-                try:
-                    page.locator(selector).first.click()
-                    edit_clicked = True
-                    break
-                except:
-                    continue
-            if not edit_clicked:
-                print("⚠️ Could not find Edit button")
-                input("Press Enter after clicking Edit manually...")
-            page.wait_for_timeout(2000)
-
-            # CHANGE CONNECTION NAME
-            name_selectors = [
-                "input[name='name']",
-                "input[name='connectionName']",
-                "input[placeholder*='name' i]",
-                "input[placeholder*='connection name' i]"
-            ]
-            for selector in name_selectors:
-                try:
-                    if page.locator(selector).count() > 0:
-                        page.locator(selector).first.fill(new_name)
-                        print(f"✅ Changed Connection Name to: {new_name}")
+            with allure.step("Click Edit button"):
+                edit_selectors = [
+                    "button:has-text('Edit')",
+                    "a:has-text('Edit')",
+                    "[aria-label='Edit']",
+                    ".edit-button"
+                ]
+                edit_clicked = False
+                for selector in edit_selectors:
+                    try:
+                        page.locator(selector).first.click()
+                        edit_clicked = True
                         break
-                except:
-                    continue
-            page.wait_for_timeout(1000)
+                    except:
+                        continue
+                assert edit_clicked, "Could not find Edit button"
+                page.wait_for_timeout(2000)
 
-            # SAVE CHANGES
-            save_selectors = [
-                "button:has-text('Save')",
-                "button:has-text('Update')",
-                "button:has-text('Submit')",
-                "button[type='submit']"
-            ]
-            for selector in save_selectors:
-                try:
-                    page.click(selector, timeout=2000)
-                    print("✅ Saved changes\n")
-                    break
-                except:
-                    continue
-            page.wait_for_timeout(2000)
-            print("\n✅ Script completed: Connection name changed and saved.")
-            print(f"🔗 Current URL: {page.url}")
+            with allure.step(f"Change connection name to {new_name}"):
+                name_selectors = [
+                    "input[name='name']",
+                    "input[name='connectionName']",
+                    "input[placeholder*='name' i]",
+                    "input[placeholder*='connection name' i]"
+                ]
+                name_changed = False
+                for selector in name_selectors:
+                    try:
+                        if page.locator(selector).count() > 0:
+                            page.locator(selector).first.fill(new_name)
+                            name_changed = True
+                            break
+                    except:
+                        continue
+                assert name_changed, f"Could not change connection name to {new_name}"
+                page.wait_for_timeout(1000)
+
+            with allure.step("Save changes"):
+                save_selectors = [
+                    "button:has-text('Save')",
+                    "button:has-text('Update')",
+                    "button:has-text('Submit')",
+                    "button[type='submit']"
+                ]
+                saved = False
+                for selector in save_selectors:
+                    try:
+                        page.click(selector, timeout=2000)
+                        saved = True
+                        break
+                    except:
+                        continue
+                assert saved, "Could not save changes"
+                page.wait_for_timeout(2000)
+                allure.attach(page.url, name="Current URL", attachment_type=allure.attachment_type.TEXT)
         except Exception as e:
-            print(f"\n❌ ERROR: {e}")
+            allure.attach(str(e), name="Error", attachment_type=allure.attachment_type.TEXT)
             page.screenshot(path="error.png")
+            allure.attach.file("error.png", name="Error Screenshot", attachment_type=allure.attachment_type.PNG)
+            raise
         finally:
             browser.close()
-
-if __name__ == "__main__":
-    edit_connection_name(connection_name="PerrylHealth", new_name="PerrylHealth Connect")
